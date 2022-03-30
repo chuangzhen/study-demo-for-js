@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>验证css3新特性</title>
+    <style>
+        .propertyContainer {
+            width: 100%;
+            border: 1px solid #999;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 10px;
+        }
+
+        .rowContainer {
+            width: max-content;
+            display: flex;
+            flex-direction: row;
+            overflow: auto;
+            padding: 20px;
+        }
+
+        .card1 {
+            width: 200px;
+            height: 200px;
+            margin: 10px;
+            background: #e1e1e1;
+        }
+
+        .card2 {
+            width: 200px;
+            height: 50px;
+            margin: 10px;
+            background: #e1e1e1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card3 {
+            width: 100%;
+            padding: 10px;
+            border: 1px dashed #999;
+        }
+
+
+        /* 背景渐变色 */
+        .linergradient {
+            background: linear-gradient(#f69d3c, #3f87a6);
+        }
+
+        .radialgradient {
+            background: radial-gradient(#f69d3c, #3f87a6);
+        }
+
+        .repeatinglinergradient {
+            background: repeating-linear-gradient(#f69d3c, #3f87a6 50px);
+        }
+
+        .repeatingradialgradient {
+            background: repeating-radial-gradient(#f69d3c, #3f87a6 50px);
+        }
+
+
+        /* 阴影 */
+        .insetBoxShadow {
+            box-shadow: inset 20px 20px 10px 30px #999;
+        }
+
+        .boxShadow {
+            box-shadow: 20px 20px 0px 20px #999;
+        }
+
+        .mutilBoxShadow {
+            box-shadow: -20px 20px 0 10px red, 30px 30px 10px 20px blue, inset 15px 10px 10px 10px yellow;
+        }
+
+        .nomalTextShadow {
+            text-shadow: red 2px 1px;
+        }
+
+        .textShadow {
+            text-shadow: 2px 1px 2px red;
+        }
+
+        .mutilTextShadow {
+            text-shadow: 2px 1px 2px red, -1px 2px 1px blue;
+        }
+
+        /* 伪类 X: 标签选择器（类选择器，id选择器等）|  X:first-child【父元素下的第一个子元素】  | :last-child【父元素下的最后一个子元素】  | :nth-child(number) | :nth-last-child(number) 
+        *  表示X元素的父元素下的子元素，【不区分类型 】 
+        
+        *  Y:first-of-type  |  :last-of-type  |  :nth-of-type(number)  | :nth-last-of-type(number) 
+        *  表示Y元素的父级元素下，第几个Y元素的样式--【区分类型】
+
+        *   Z:only-child     => z的父元素下只有一个子元素，且该子元素只能是z类型，则z元素获得该样式  【父元素只能由一个子元素】
+        *   A:only-of-type   => A元素的父元素下，只有一个A类型元素，则A获得:only-of-type伪类的样式  【父元素不一定就只有一个子元素】
+        */
+        .nthChild:nth-child(2) {
+            color: red;
+        }
+
+        .nthType:nth-of-type(1) {
+            color: blue;
+        }
+
+        .onlyChild:only-child {
+            color: green;
+        }
+
+        .onlyType:only-of-type {
+            color: green;
+        }
+
+
+        /* 伪元素 */
+        .bef-aft {
+            color: red;
+            position: relative;
+        }
+
+        .bef-aft::after {
+            content: '这是本节点的after伪元素节点';
+            color: #3f87a6;
+            width: 200px;
+            height: 40px;
+            background: #e1e1e1;
+            position: absolute;
+            bottom: -40px;
+        }
+
+        .bef-aft::before {
+            content: '这是本节点的before伪元素节点';
+            color: #f69d3c;
+            width: 200px;
+            height: 40px;
+            background: #fad9d9;
+            position: absolute;
+            top: -40px;
+        }
+
+        .translate {
+            transform: translate(10px, 20px);
+        }
+
+        .translateX {
+            transform: translateX(20px);
+        }
+
+        .translateY {
+            transform: translateY(-10px);
+        }
+
+        .rotate {
+            transform: rotate(30deg);
+        }
+
+        .rotateX {
+            transform: rotateY(30deg);
+        }
+
+        .rotateY {
+            transform: rotateX(30deg);
+        }
+
+        .scale {
+            transform: scale(0.5);
+        }
+
+        .scaleX {
+            transform: scaleX(2);
+        }
+
+        .scaleY {
+            transform: scaleY(1.5);
+        }
+
+        .transition {
+            width: 400px;
+            height: 600px;
+            padding: 10px;
+            background: #3f87a6;
+            transition: all 2s ease-in-out;
+            margin-right: 50px;
+        }
+
+        .transition:hover {
+            width: 800px;
+            height: 600px;
+            background: #f69d3c;
+        }
+
+        .anination {
+            width: 400px;
+            min-width: 500px;
+            padding: 20px;
+            animation: anima 2s ease-in-out 2s 2 alternate-reverse backwards;
+        }
+
+        @keyframes anima {
+            from {
+                background: #3f87a6;
+                opacity: 0.2;
+                width: 400px;
+            }
+
+            to {
+                background: #f69d3c;
+                opacity: 1;
+                width: 800px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <!-- gradient渐变效果 -->
+    <div class="propertyContainer">
+        <h2>gradient渐变效果</h2>
+        <div class="rowContainer">
+            <div class="card1 linergradient">liner-gradient</div>
+            <div class="card1 radialgradient">radial-gradient</div>
+            <div class="card1 repeatinglinergradient">repeating-liner-gradient</div>
+            <div class="card1 repeatingradialgradient">repeating-radial-gradient</div>
+        </div>
+    </div>
+    <!-- shadow阴影效果 -->
+    <div class="propertyContainer">
+        <div>
+            <h2>box-shadow阴影效果-针对整个盒子</h2>
+            <h5>inset（内凹，不写默认 外凸） | offset-X：水平方向的阴影宽度 | offset-y：垂直方向的阴影高度 | blur-radius：阴影模糊度【针对整个阴影】 |
+                spread-radius：阴影全部四个方向的【针对整个阴影】扩散宽度 | color ：颜色</h5>
+            <div class="rowContainer">
+                <div class="card2 insetBoxShadow">inset</div>
+                <div class="card2 boxShadow">normal</div>
+                <div class="card2 mutilBoxShadow">多个阴影用,分割</div>
+            </div>
+        </div>
+        <div>
+            <h2>text-shadow阴影效果-针对文本的形状</h2>
+            <h5>offset-x | offset-y | blur-radius | color ,多个阴影用,分割</h5>
+            <div class="rowContainer">
+                <div class="card2 nomalTextShadow">inset</div>
+                <div class="card2 textShadow">normal</div>
+                <div class="card2 mutilTextShadow">多个阴影用,分割</div>
+            </div>
+        </div>
+
+    </div>
+    <!-- 伪类 :xxx -->
+    <div class="propertyContainer">
+        <div class="card3">
+            <h4> 父元素下的子元素要是匹配不上对应的位置，则该伪类失效===:first-child | :last-child | :nth-child(number) |
+                :nth-last-child(number)===</h4>
+            <span class="nthChild">span标签 nthChild类名</span>
+            <p class="nthChild">p标签 nthChild类名</p>
+            <h4 class="nthChild">h4标签 nthChild类名</h4>
+        </div>
+        <div class="card3 ">
+            <h4>y:nth-of-type 父元素下的子元素要是匹配不上对应的位置，则该伪类失效,且要匹配对应子元素的元素类型、选择器名是否一致</h4>
+            <h4>===:first-of-type | :last-of-type | :nth-of-type(number) | :nth-last-of-type(number)===</h4>
+            <span class="nthType">span标签 nthType类名</span>
+            <p class="nthType">p标签 nthType类名</p>
+            <h6 class="nthType">h6标签 nthType类名</h6>
+        </div>
+        <div class="card3">
+            <!-- <span class="onlyChild">span标签 onlyChild 类名</span> -->
+            <p class="onlyChild">p标签 onlyChild 类名-----:only-child,有不止一个兄弟节点则该伪类不生效，不区分元素类型</p>
+        </div>
+        <div class="card3">
+            <p class="onlyType" id="aa">p标签 onlyType 类名-----:only-of-type,有相同元素类型相同选择器名称的兄弟节点则该伪类不生效-区分元素类型和类名</p>
+            <p class="onlyType" id="bb">p标签 onlyType 类名</p>
+        </div>
+    </div>
+
+    <!-- 伪元素 -->
+    <div class="propertyContainer">
+        <div class="bef-aft">伪元素::after ::before</div>
+    </div>
+    <!-- css3新特性 -->
+
+    <div class="propertyContainer">
+        <h2>transform常用样式函数：scale translate rotate</h2>
+        <div class="rowContainer">
+            <div class="card2 translate">
+                <p>translate(x,y):传一个默认x:水平方向平移，y：竖直方向平移</p>
+                <p>translateX(number px)|translateY(number px)</p>
+            </div>
+            <div class="card2 translateX">
+                <p>translateX(number px)::水平方向平移，</p>
+            </div>
+            <div class="card2 translateY">
+                <p>translateY(number px):y:竖直方向平移</p>
+            </div>
+        </div>
+        <div class="rowContainer">
+            <div class="card2 rotate">
+                <p>rotate(x deg) == rotateZ(xx deg) : 沿着Z轴旋转xx度</p>
+            </div>
+            <div class="card2 rotateX">
+                <p>rotateX(xx deg):x轴平方向旋转xx度</p>
+            </div>
+            <div class="card2 rotateY">
+                <p>rotateY(xx deg):y轴平方向旋转xx度</p>
+            </div>
+        </div>
+        <div class="rowContainer">
+            <div class="card2 scale">
+                <p>rotate(number1,number2):只传一个相当于number1 number2的值是一样的 : 沿着xy轴缩放number倍</p>
+            </div>
+            <div class="card2 scaleX">
+                <p>rotateX(number):x轴平方向缩放number倍</p>
+            </div>
+            <div class="card2 scaleY">
+                <p>rotateY(number):y轴平方向缩放number倍</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="propertyContainer">
+        <h2>transition和animation</h2>
+        <div class="rowContainer">
+            <div class="transition">
+                <h4>过度 transition: property duration timing-function delay; 需要搭配触发事件才能生效，例如:hover(鼠标移入时)</h4>
+                <p>property : 设置过渡效果的 CSS 属性的名称</p>
+                <p>duration : 持续时间 s/ms</p>
+                <p>timing-function ： 过度效果的速度曲线</p>
+                <p>delay ：xxx s(ms) 延迟多久（s/ms）</p>
+                <h5>一个元素有多个过度效果使用,分割</h5>
+                <h5>该元素的所有属性都要过度效果使用 transition:all 2s ease-in-out .2s</h5>
+            </div>
+            <div class="anination">
+                <h3>动画animation:name duration timing-function delay iteration-count direction fill-mode play-state </h3>
+                <p>animation-name : 记录动画的名称name,配合@keyframes使用; @keyframes name {....} </p>
+                <p>animation-duration : 动画持续时间</p>
+                <p>animation-timing-function : 动画过程的速度效果</p>
+                <p>animation-delay : 延时</p>
+                <p><em>animation-iteration-count</em> : 动画执行次数 </p>
+                <p><em>animation-direction</em> : 动画的运行方向 <em>【注意兼容性】</em> - 【normal正常正向】 【reverse反向】 【 alternate
+                    交替-先正向执行一遍，再反向执行一遍，timing-function也会交替执行-跟iteration-count搭配使用】 【 alternate-reverse
+                    循环交替:先反向运行一遍，再正向运行一遍，循环交替,-跟iteration-count搭配使用】</p>
+                <p><em>animation-fill-mode</em> :
+                    动画播放前头应用于元素的样式状态；【forwards:动画执行后，元素保留动画的最后一帧的样式】【backwards:动画执行前，元素应用动画的第一帧样式，在delay开始之前都保持该状态】【both:间距forwards和backwards】【none:没有，默认none】
+                </p>
+                <p>animation-paly-state : 改变当前元素的动画播放状态<em>【注意兼容性】</em> 【paused 暂停当前元素正在播放的动画】 【running 接着开始播放被暂停的元素动画】
+                    【通过js切换元素的anination-play-state就可以达成动画的播放和暂停效果的切换】</p>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+</body>
+
+</html>
